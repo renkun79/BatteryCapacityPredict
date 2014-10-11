@@ -27,7 +27,7 @@ f3=@F3;
 %%%更换模型需要修改的参数%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 load('a4shiyan.mat');
 initial_data=a4;%原始量测数据
-model=4;
+model=5;
 predict_Start=32;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
@@ -238,7 +238,7 @@ for i=1:N
     RUL1(i)=temp(1);
 end;
 figure;
-subplot(2,1,1);
+subplot(1,3,1);
 hist(RUL1,max(RUL1)-min(RUL1));
 xlim([min(RUL1) max(RUL1)]);
 xlabel('RUL');
@@ -252,13 +252,18 @@ for i=1:N
       RUL2(i)=temp(1);
     end;
 end;
+subplot(1,3,2);
+hist(RUL2,max(RUL2)-min(RUL2));
+xlim([min(RUL2) max(RUL2)]);
+xlabel('RUL');
+title('模型2RUL');
 %模型3的RUL处理
 RUL3=zeros(1,N);
 for i=1:N
     temp=find(s3(:,i)<0.72);
     RUL3(i)=temp(1);
 end;
-subplot(2,1,2);
+subplot(1,3,3);
 hist(RUL3,max(RUL3)-min(RUL3));
 xlim([min(RUL3) max(RUL3)]);
 xlabel('RUL');

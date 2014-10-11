@@ -1,3 +1,10 @@
+%%
+%model=1--A1 
+%model=2--A2
+%model=3--A3
+%model=4--A4
+%model=5--A4参数估计得到参数
+%%
 function [x]=F1(x_Pre,k,model)
 %%
 %指数模型
