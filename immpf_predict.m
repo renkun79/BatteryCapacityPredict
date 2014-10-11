@@ -6,7 +6,14 @@ echo off;
 %Model:Battery
 %Author:Ye Zhe
 %CreateDate:2014.7.9
+%EditDate
+%2014/10/11 by Ye Zhe
+%添加了预测失效时刻的模块
 %School:Harbin Institute of Technology,China
+%%
+%修改记录:
+%去掉F1 F2 F3预测的参数，
+%%
 %说明:有4组数据a1shiyan.mat,a2shiyan.mat,a3shiyan.mat,a4shiyan.mat四组电池数据分别对应
 %model的值为1,2,3,4
 %%
@@ -130,6 +137,7 @@ for t=2:predict_Start
     title('模型一估计');
     xlabel('cycleTimes'); ylabel('Capacity/%');
 end;
+
 %%
 for t=predict_Start+1:cycleTimes
     x1_IMM(t)=0;
@@ -220,3 +228,53 @@ plot([0 cycleTimes],[sum(fc3)/cycleTimes sum(fc3)/cycleTimes],'b');
 legend('综合结果','模型1','模型2','模型3');
 hold off
 title('方差');
+%%
+%计算RUL的模块
+%将现在的时间步产生的每个粒子，将每个粒子当作单独的一个观测，记录下它的失效时间，最后作统计
+%模型1的RUL处理
+RUL1=zeros(1,N);
+for i=1:N
+    temp=find(s1(:,i)<0.72);
+    RUL1(i)=temp(1);
+end;
+figure;
+subplot(2,1,1);
+hist(RUL1,max(RUL1)-min(RUL1));
+xlim([min(RUL1) max(RUL1)]);
+xlabel('RUL');
+title('模型1RUL');
+
+%模型2的RUL处理
+RUL2=zeros(1,N);
+for i=1:N
+    temp=find(s2(:,i)<0.72);
+    if (length(temp)>0)
+      RUL2(i)=temp(1);
+    end;
+end;
+%模型3的RUL处理
+RUL3=zeros(1,N);
+for i=1:N
+    temp=find(s3(:,i)<0.72);
+    RUL3(i)=temp(1);
+end;
+subplot(2,1,2);
+hist(RUL3,max(RUL3)-min(RUL3));
+xlim([min(RUL3) max(RUL3)]);
+xlabel('RUL');
+title('模型3RUL');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
