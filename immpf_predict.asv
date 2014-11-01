@@ -243,10 +243,8 @@ RUL_Pro3=zeros(1,cycleTimes);
 RUL1=zeros(1,N);
 for i=1:N
     temp=find(s1(:,i)<0.72);
-    if (length(temp)>0)
-        RUL1(i)=temp(1);
-        RUL_Pro1(temp(1))=RUL_Pro1(temp(1))+q1(predict_Start,i); 
-    end;
+    RUL1(i)=temp(1);
+    RUL_Pro1(temp(1))=RUL_Pro1(temp(1))+q1(predict_Start,i); 
 end;
 figure;
 subplot(1,3,1);
@@ -273,10 +271,8 @@ title('Ä£ÐÍ2RUL');
 RUL3=zeros(1,N);
 for i=1:N
     temp=find(s3(:,i)<0.72);
-    if (length(temp)>0)
-        RUL3(i)=temp(1);
-        RUL_Pro3(temp(1))=RUL_Pro3(temp(1))+q3(predict_Start,i); 
-    end;
+    RUL3(i)=temp(1);
+     RUL_Pro3(temp(1))=RUL_Pro3(temp(1))+q3(predict_Start,i); 
 end;
 subplot(1,3,3);
 hist(RUL3,max(RUL3)-min(RUL3));
